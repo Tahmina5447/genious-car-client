@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../../assets/images/login/login.svg'
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Login = () => {
 
-    const {loginUser}=useContext(AuthContext)
+    const {user,loginUser}=useContext(AuthContext)
     const location =useLocation()
     const navigate=useNavigate();
-    const from=location.state?.from?.pathname || '/';
+    const from=location?.state?.from?.pathname || '/';
 
     const handleLogin=event=>{
         event.preventDefault();
@@ -25,23 +25,29 @@ const Login = () => {
                 email:user.email
             }
             // get jst token
-            fetch('http://localhost:5000/jwt',{
+            fetch('https://y-five-pink.vercel.app/jwt',{
                 method:'POST',
                 headers:{
-                    'content-type':'appllication/json'
+                    'content-type':'application/json'
                 },
                 body:JSON.stringify(currentUser)
+                
             })
             .then(res=>res.json())
             .then(data=>{
                 // local storage is not the best place to store jwt token
                 localStorage.setItem('token',data.token)
                 navigate(from,{replace:true})
+                
             })
         })
         .catch(err=>console.error(err));
     }
-
+    // useEffect(()=>{
+    //     if(user){
+    //         navigate(from,{replace:true})
+    //     }
+    // },[navigate,from,user])
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
@@ -68,9 +74,7 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" />
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
+                            
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>

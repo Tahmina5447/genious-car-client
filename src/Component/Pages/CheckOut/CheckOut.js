@@ -28,7 +28,7 @@ const CheckOut = () => {
         }
 
 
-        fetch('http://localhost:5000/order',{
+        fetch('https://y-five-pink.vercel.app/order',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

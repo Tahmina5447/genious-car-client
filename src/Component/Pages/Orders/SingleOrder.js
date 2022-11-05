@@ -6,7 +6,7 @@ const SingleOrder = ({order,handleDelete,handleStatusUpdate}) => {
 
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`https://y-five-pink.vercel.app/services/${service}`)
         .then(res=>res.json())
         .then(data=>setOrderImg(data))
         .catch(err=>console.error(err))

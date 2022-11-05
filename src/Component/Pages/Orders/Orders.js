@@ -9,13 +9,13 @@ const Orders = () => {
     console.log(orders)
     
     useEffect(()=>{
-        fetch(`http://localhost:5000/order?email=${user?.email}`,{
+        fetch(`https://y-five-pink.vercel.app/order?email=${user?.email}`,{
             headers:{
                 authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(res=>{
-            if(res.status === 401 || res.status ===403){
+            if(res.status === 401 || res.status === 403){
                 logOut();
             }
             return res.json()
@@ -29,7 +29,7 @@ const Orders = () => {
    
 
     const handleDelete=id=>{
-        fetch(`http://localhost:5000/order/${id}`,{
+        fetch(`https://y-five-pink.vercel.app/order/${id}`,{
             method:'DELETE'
         })
         .then(res=>res.json())
@@ -47,7 +47,7 @@ const Orders = () => {
 
 
     const handleStatusUpdate = id => {
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://y-five-pink.vercel.app/order/${id}`, {
             method: 'PATCH', 
             headers: {
                 'content-type': 'application/json'

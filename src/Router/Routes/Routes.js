@@ -30,7 +30,7 @@ const router=createBrowserRouter([
             },
             {
                 path:'/checkout/:id',
-                loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`),
+                loader:({params})=>fetch(`https://y-five-pink.vercel.app/services/${params.id}`),
                 element:<PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             }
             
